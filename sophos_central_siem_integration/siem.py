@@ -17,12 +17,12 @@ import logging
 import logging.handlers
 import os
 import re
-import state
+from sophos_central_siem_integration import state
 from optparse import OptionParser
-import name_mapping
-import config
-import api_client
-import vercheck
+from sophos_central_siem_integration import name_mapping
+from sophos_central_siem_integration import config
+from sophos_central_siem_integration import api_client
+from sophos_central_siem_integration import vercheck
 
 VERSION = "2.1.0"
 QUIET = False

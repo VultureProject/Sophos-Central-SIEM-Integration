@@ -24,10 +24,10 @@ import logging
 import logging.handlers
 import os
 import socket
-import name_mapping
+from sophos_central_siem_integration import name_mapping
 from random import randint
 import time
-import config
+from sophos_central_siem_integration import config
 
 
 SYSLOG_SOCKTYPE = {"udp": socket.SOCK_DGRAM, "tcp": socket.SOCK_STREAM}
