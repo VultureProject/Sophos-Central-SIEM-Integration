@@ -28,7 +28,6 @@ setup(
         "pathlib",
         "requests",
         "config",
-        "logging",
         "pycef"
     ],
     classifiers=[
