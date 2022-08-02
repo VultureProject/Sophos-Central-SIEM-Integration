@@ -16,7 +16,7 @@ import calendar
 
 import urllib.request as urlrequest
 import urllib.error as urlerror
-from urllib.parse import urlencode
+from urllib.parse import urlencode, urlparse
 
 import datetime
 import json
@@ -24,10 +24,10 @@ import logging
 import logging.handlers
 import os
 import socket
-from sophos_central_siem_integration import name_mapping
+import name_mapping
 from random import randint
 import time
-from sophos_central_siem_integration import config
+import config
 
 
 SYSLOG_SOCKTYPE = {"udp": socket.SOCK_DGRAM, "tcp": socket.SOCK_STREAM}
@@ -193,6 +193,11 @@ class ApiClient:
             try:
                 data = urlencode(body).encode("utf-8") if body is not None else body
                 request = urlrequest.Request(host_url, data, header)
+
+                if self.config.proxy:
+                    proxy_http = urlparse(self.config.proxy.get('http'))
+                    request.set_proxy(proxy_http.netloc, 'http')
+
                 response = self.opener.open(request)
             except urlerror.HTTPError as e:
                 if e.code in (503, 504, 403, 429):
