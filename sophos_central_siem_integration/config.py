@@ -25,6 +25,9 @@ class Config:
         self.config.read(path)
 
     def __getattr__(self, name):
+        # proxy config must be a dict or None
+        if name == "proxy":
+            return self.config["proxy"] if self.config.has_section("proxy") else None
         return self.config.get("login", name)
 
 
