@@ -93,7 +93,7 @@ class ApiClient:
         else:
             handler = urlrequest.HTTPSHandler()
 
-        return urlrequest.build_opener(handler)
+        return urlrequest.build_opener(handler, urlrequest.ProxyHandler(self.config.proxy))
 
     def create_log_dir(self):
         """Create the log directory
